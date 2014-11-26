@@ -18,8 +18,9 @@ public class NewMain {
     public static void main(String[] args) {
         // TODO code application logic here
         B b1 = new B();
+        System.out.println("------------1");
         A a = new B();
-        
+        System.out.println("------------2");
         a.breathe();
         a.eat();
         System.out.println("--------------------");
