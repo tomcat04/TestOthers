@@ -30,7 +30,7 @@ import java.util.Set;
  */
 public class MySelector {
 
-    private int port = 8080;
+    private final int port = 8080;
     private SocketAddress address = null;
     private Selector selector;
     /**
@@ -143,6 +143,6 @@ public class MySelector {
               // 关闭连接
               out.close();
            }
-       }
+        }
     }
 }

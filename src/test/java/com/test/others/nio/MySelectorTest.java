@@ -6,7 +6,6 @@
 
 package com.test.others.nio;
 
-import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import org.junit.After;
 import org.junit.AfterClass;
