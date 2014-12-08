@@ -6,6 +6,8 @@
 
 package com.test.others.designPatterns.my;
 
+import java.text.DateFormat;
+
 /**
  *
  * @author cgx1844568
@@ -24,8 +26,8 @@ public class MyServiceImpl implements IMyService{
     public void createReq(MyFormbean formbean) {
         
         this.method1();
-        
-        //dao.insert();
+       DateFormat df = DateFormat.getDateInstance();
+        //dao.insert();操作数据库
     }
     
     private void method1(){
