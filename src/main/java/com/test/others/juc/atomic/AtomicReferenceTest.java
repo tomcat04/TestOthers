@@ -3,22 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.test.others.atomic;
+package com.test.others.juc.atomic;
 
-import java.util.concurrent.atomic.AtomicStampedReference;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  *
  * @author cgx1844568
  */
-public class AtomicStampedReferenceTest {
+public class AtomicReferenceTest {
 
-    public final static AtomicStampedReference<String> ATOMIC_REFERENCE = new AtomicStampedReference<String>("abc", 0);
+    /**
+     * 相关方法列表
+     *
+     * @see AtomicReference#compareAndSet(Object, Object)
+     * 对比设置值，参数1：原始值，参数2：修改目标引用
+     * @see AtomicReference#getAndSet(Object) 将引用的目标修改为设置的参数，直到修改成功为止，返回修改前的引用
+     */
+    public final static AtomicReference<String> ATOMIC_REFERENCE = new AtomicReference<String>("abc");
 
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
             final int num = i;
-            final int stamp = ATOMIC_REFERENCE.getStamp();
             new Thread() {
                 public void run() {
                     try {
@@ -26,18 +32,11 @@ public class AtomicStampedReferenceTest {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    if (ATOMIC_REFERENCE.compareAndSet("abc", "abc2", stamp, stamp + 1)) {
+                    if (ATOMIC_REFERENCE.compareAndSet("abc", new String("abc"))) {
                         System.out.println("我是线程：" + num + ",我获得了锁进行了对象修改！");
                     }
                 }
             }.start();
         }
-        new Thread() {
-            public void run() {
-                int stamp = ATOMIC_REFERENCE.getStamp();
-                while (!ATOMIC_REFERENCE.compareAndSet("abc2", "abc", stamp, stamp + 1)){};
-                System.out.println("已经改回为原始值！");
-            }
-        }.start();
     }
 }
