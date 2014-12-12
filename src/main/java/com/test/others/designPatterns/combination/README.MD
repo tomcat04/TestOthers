@@ -1,0 +1,4 @@
+组合模式
+
+Menu和MenuItem都继承自MenuComponent
+同时Menu含有父类对象(因此Menu可以包含MenuItem和自己Menu)
